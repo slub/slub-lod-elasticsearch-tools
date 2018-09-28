@@ -22,13 +22,6 @@ from es2json import ArrayOrSingleValue
 from es2json import eprint
 from es2json import litter
 
-def uniq(lst):
-    last = object()
-    for item in lst:
-        if item == last:
-            continue
-        yield item
-        last = item
 
 def isint(num):
     try: 
@@ -295,7 +288,7 @@ def getmarc(record,regex,entity):
                 ret=litter(ret,ArrayOrSingleValue(list(getmarcvalues(record,string,entity))))
         if ret:
             if isinstance(ret,list):    #simple deduplizierung via transformation zum set und retour
-                ret = list(uniq(ret))
+                ret = list(set(ret))
             return ArrayOrSingleValue(ret)
 
 def getmarcvalues(record,regex,entity):
